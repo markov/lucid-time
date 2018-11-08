@@ -1,0 +1,13 @@
+# This file has very limited formatting options, however because of its simplicity it is supported
+# by almost any IDE, text editor or auto-formatter you know of: https://editorconfig.org/
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.py,*.java,*.kt,*.kts]
+indent_style = spaces
+indent_size = 4
+continuation_indent_size = 8
+max_line_length = 100
