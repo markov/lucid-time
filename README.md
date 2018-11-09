@@ -1,5 +1,7 @@
-Lucid Time for Kotlin ![master status](https://travis-ci.org/markov/lucid-time.svg?branch=master)
+Lucid Time for Kotlin
 =====================
+
+[![build status](https://travis-ci.org/markov/lucid-time.svg?branch=master)](https://travis-ci.org/markov/lucid-time)
 
 The goal of this project is to make working with time durations in Kotlin simpler.
 
