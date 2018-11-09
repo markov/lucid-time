@@ -1,1 +1,1 @@
-include(":time-units")
+include(":duration")
