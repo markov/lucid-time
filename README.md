@@ -45,6 +45,7 @@ And allow for simpler APIs like:
 ```kotlin
 fun delayBy(amount: Duration) {...}
 
+delayBy(150.seconds)
 delayBy(2.5.minutes)
 delayBy(2.minutes + 30.seconds)
 ```
