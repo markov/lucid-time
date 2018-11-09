@@ -6,4 +6,7 @@ subprojects {
     repositories {
         mavenCentral()
     }
+
+    group = "eu.markov.kotlin.lucidtime"
+    version = "1.0.0"
 }
