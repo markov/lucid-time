@@ -1,22 +1,21 @@
 package com.yelp.kotlin.itc
 
-inline class Minutes(override val nanos: Long) : Duration<Minutes> {
-    override inline fun compareTo(other: Duration<*>): Int {
-        return this.nanos.compareTo(other.nanos)
-    }
-
-    override inline operator fun plus(other: Duration<*>) = Minutes(nanos + other.nanos)
-    override inline operator fun minus(other: Duration<*>) = Minutes(nanos - other.nanos)
+class Minutes internal constructor(nanos: Long) : Duration(nanos) {
+    override operator fun plus(other: Duration) = Minutes(nanos + other.nanos)
+    override operator fun minus(other: Duration) = Minutes(nanos - other.nanos)
 }
 
-inline val Duration<*>.asMinutes: Minutes get() = Minutes(nanos)
+val Duration.asMinutes: Minutes get() = Minutes(nanos)
+inline val Double.asMinutes: Minutes get() = minutes.asMinutes
+inline val Float.asMinutes: Minutes get() = minutes.asMinutes
+inline val Number.asMinutes: Minutes get() = minutes.asMinutes
 
-inline val Double.minutes: Minutes get() = (60.0 * this).seconds.asMinutes
-inline val Double.minute: Minutes get() = minutes
+inline val Double.minutes: Duration get() = (60.0 * this).seconds
+inline val Float.minutes: Duration get() = this.toDouble().minutes
+inline val Long.minutes: Duration get() = (60L * this).seconds
+inline val Number.minutes: Duration get() = this.toLong().minutes
 
-inline val Float.minutes: Minutes get() = this.toDouble().minutes
-inline val Float.minute: Minutes get() = minutes
-
-inline val Long.minutes: Minutes get() = (60L * this).seconds.asMinutes
-inline val Number.minutes: Minutes get() = this.toLong().minutes
-inline val Number.minute: Minutes get() = minutes
+inline val Double.minute: Duration get() = minutes
+inline val Float.minute: Duration get() = minutes
+inline val Long.minute: Duration get() = minutes
+inline val Number.minute: Duration get() = minutes

@@ -1,22 +1,21 @@
 package com.yelp.kotlin.itc
 
-inline class Days(override val nanos: Long) : Duration<Days> {
-    override inline fun compareTo(other: Duration<*>): Int {
-        return this.nanos.compareTo(other.nanos)
-    }
-
-    override inline operator fun plus(other: Duration<*>) = Days(nanos + other.nanos)
-    override inline operator fun minus(other: Duration<*>) = Days(nanos - other.nanos)
+class Days internal constructor(nanos: Long) : Duration(nanos) {
+    override operator fun plus(other: Duration) = Days(nanos + other.nanos)
+    override operator fun minus(other: Duration) = Days(nanos - other.nanos)
 }
 
-inline val Duration<*>.asDays: Days get() = Days(nanos)
+val Duration.asDays: Days get() = Days(nanos)
+inline val Double.asDays: Days get() = days.asDays
+inline val Float.asDays: Days get() = days.asDays
+inline val Number.asDays: Days get() = days.asDays
 
-inline val Double.days: Days get() = (24.0 * this).hours.asDays
-inline val Double.day: Days get() = days
+inline val Double.days: Duration get() = (24.0 * this).hours
+inline val Float.days: Duration get() = this.toDouble().days
+inline val Long.days: Duration get() = (24L * this).hours
+inline val Number.days: Duration get() = this.toLong().days
 
-inline val Float.days: Days get() = this.toDouble().days
-inline val Float.day: Days get() = days
-
-inline val Long.days: Days get() = (24L * this).hours.asDays
-inline val Number.days: Days get() = this.toLong().days
-inline val Number.day: Days get() = days
+inline val Double.day: Duration get() = days
+inline val Float.day: Duration get() = days
+inline val Long.day: Duration get() = days
+inline val Number.day: Duration get() = days

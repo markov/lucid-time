@@ -1,22 +1,21 @@
 package com.yelp.kotlin.itc
 
-inline class Seconds(override val nanos: Long) : Duration<Seconds> {
-    override inline fun compareTo(other: Duration<*>): Int {
-        return this.nanos.compareTo(other.nanos)
-    }
-
-    override inline operator fun plus(other: Duration<*>) = Seconds(nanos + other.nanos)
-    override inline operator fun minus(other: Duration<*>) = Seconds(nanos - other.nanos)
+class Seconds internal constructor(nanos: Long) : Duration(nanos) {
+    override operator fun plus(other: Duration) = Seconds(nanos + other.nanos)
+    override operator fun minus(other: Duration) = Seconds(nanos - other.nanos)
 }
 
-inline val Duration<*>.asSeconds: Seconds get() = Seconds(nanos)
+val Duration.asSeconds: Seconds get() = Seconds(nanos)
+inline val Double.asSeconds: Seconds get() = seconds.asSeconds
+inline val Float.asSeconds: Seconds get() = seconds.asSeconds
+inline val Number.asSeconds: Seconds get() = seconds.asSeconds
 
-inline val Double.seconds: Seconds get() = (1000.0 * this).millis.asSeconds
-inline val Double.second: Seconds get() = seconds
+inline val Double.seconds: Duration get() = (1000.0 * this).millis
+inline val Float.seconds: Duration get() = this.toDouble().seconds
+inline val Long.seconds: Duration get() = (1000L * this).millis
+inline val Number.seconds: Duration get() = this.toLong().seconds
 
-inline val Float.seconds: Seconds get() = this.toDouble().seconds
-inline val Float.second: Seconds get() = this.toDouble().seconds
-
-inline val Long.seconds: Seconds get() = (1000L * this).millis.asSeconds
-inline val Number.seconds: Seconds get() = this.toLong().seconds
-inline val Number.second: Seconds get() = this.toLong().seconds
+inline val Double.second: Duration get() = seconds
+inline val Float.second: Duration get() = seconds
+inline val Long.second: Duration get() = seconds
+inline val Number.second: Duration get() = seconds
