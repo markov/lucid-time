@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm")
     `maven-publish`
+    id("signing")
     id("org.jetbrains.dokka") version "0.9.17"
 }
 
@@ -18,7 +19,6 @@ val sourcesJar by tasks.registering(Jar::class) {
 }
 
 val dokka by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class) {
-    outputFormat = "javadoc"
     outputDirectory = "$buildDir/javadoc"
 }
 
@@ -55,5 +55,11 @@ publishing {
                 }
             }
         }
+    }
+}
+
+if (project.hasProperty("signing.keyId")) {
+    signing {
+        sign(publishing.publications["mavenJava"])
     }
 }

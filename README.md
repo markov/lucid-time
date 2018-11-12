@@ -11,11 +11,11 @@ Usage
 The main purpose is to make declaring time literals in code very concise and very close to the natural English language.
 
 ```kotlin
-val threeMin: Duration = 3.minutes
+val soon = Random.nextDouble(52.0).weeks
+val threeMin = 3.minutes
 val anHourAndAHalf: Duration = 1.5.hours
 val aLittleLonger: Duration = anHourAndAHalf + threeMin
-val notQuiteAsLong: Duration = aLittleLonger - 1.nano
-val notQuiteAsLongMillis: Long = notQuiteAsLong.toMillis
+val aLittleLongerMillis: Long = notQuiteAsLong.toMillis
 val aWeekAndAHalfInMinutes: Long = 1.5.weeks.toMinutes
 ```
 
