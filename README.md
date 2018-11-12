@@ -8,6 +8,14 @@ The goal of this project is to make working with time durations in Kotlin simple
 Usage
 -----
 
+Add it to your gradle dependencies.
+
+```kotlin
+dependencies {
+    implementation("eu.markov.kotlin.lucidtime:duration:1.0.0")
+}
+```
+
 The main purpose is to make declaring time literals in code very concise and very close to the natural English language.
 
 ```kotlin
