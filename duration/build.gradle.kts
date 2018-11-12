@@ -1,3 +1,5 @@
+import java.net.URI
+
 plugins {
     kotlin("jvm")
     `maven-publish`
@@ -34,6 +36,8 @@ publishing {
             artifact(sourcesJar.get())
             artifact(javadocJar.get())
             pom {
+                name.set("Lucid Time Duration for Kotlin.")
+                description.set("A simple time duration declaration and type system for kotlin.")
                 url.set("https://github.com/markov/lucid-time")
                 scm {
                     url.set("https://github.com/markov/lucid-time")
@@ -53,6 +57,30 @@ publishing {
                         name.set("Gesh Markov")
                     }
                 }
+            }
+        }
+    }
+
+    if (project.hasProperty("sonatypeUsername") &&
+        project.hasProperty("sonatypePassword")
+    ) {
+        val sonatypeUsername: String by project
+        val sonatypePassword: String by project
+
+        val isSnapshot = version.toString().endsWith("-SNAPSHOT")
+        val sonatypeRepoUrl = when {
+            isSnapshot -> "https://oss.sonatype.org/content/repositories/snapshots/"
+            else -> "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        }
+
+        repositories {
+            maven {
+                url = URI(sonatypeRepoUrl)
+                credentials {
+                    username = sonatypeUsername
+                    password = sonatypePassword
+                }
+
             }
         }
     }
