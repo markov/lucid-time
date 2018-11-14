@@ -1,28 +1,19 @@
 package eu.markov.kotlin.lucidtime.duration
 
-abstract class Duration(internal val nanos: Long) : Comparable<Duration> {
-    abstract operator fun plus(other: Duration): Duration
-    abstract operator fun minus(other: Duration): Duration
+inline class Duration(val nanos: Long) : Comparable<Duration> {
+    operator fun plus(other: Duration) = Duration(nanos + other.nanos)
+    operator fun minus(other: Duration) = Duration(nanos - other.nanos)
 
     override fun compareTo(other: Duration): Int {
         return nanos.compareTo(other.nanos)
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (other !is Duration) return false
-        return nanos == other.nanos
-    }
-
-    override fun hashCode(): Int {
-        return nanos.hashCode()
-    }
-
     override fun toString(): String {
-        return "${javaClass.simpleName}(nanos=$nanos)"
+        return "Duration(nanos=$nanos)"
     }
 }
 
-val Duration.toNanos: Long get() = nanos
+inline val Duration.toNanos: Long get() = nanos
 inline val Duration.toMicros: Long get() = toNanos / 1000
 inline val Duration.toMillis: Long get() = toMicros / 1000
 inline val Duration.toSeconds: Long get() = toMillis / 1000

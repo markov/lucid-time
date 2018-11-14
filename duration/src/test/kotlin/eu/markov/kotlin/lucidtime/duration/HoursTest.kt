@@ -1,6 +1,7 @@
 package eu.markov.kotlin.lucidtime.duration
 
 import org.junit.Test
+import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class HoursTest {
@@ -25,5 +26,10 @@ class HoursTest {
     fun subtraction_of_other_duration_calculates_correctly() {
         assertEquals(0.5.hours, 1.hour - 30.minutes)
         assertEquals(0.5.hours, 60.minutes - 0.5.hour)
+    }
+
+    @Test
+    fun is_equal_to_native_time_unit() {
+        assertEquals(TimeUnit.HOURS.toNanos(42), 42.hours.toNanos)
     }
 }

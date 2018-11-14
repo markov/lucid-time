@@ -1,6 +1,7 @@
 package eu.markov.kotlin.lucidtime.duration
 
 import org.junit.Test
+import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class DaysTest {
@@ -25,5 +26,10 @@ class DaysTest {
     fun subtraction_of_other_duration_calculates_correctly() {
         assertEquals(0.5.days, 1.day - 12.hours)
         assertEquals(0.5.days, 24.hours - 0.5.day)
+    }
+
+    @Test
+    fun is_equal_to_native_time_unit() {
+        assertEquals(TimeUnit.DAYS.toNanos(42), 42.days.toNanos)
     }
 }

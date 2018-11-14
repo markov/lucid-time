@@ -2,7 +2,6 @@ package eu.markov.kotlin.lucidtime.duration
 
 import org.junit.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
 import kotlin.test.assertNotSame
 import kotlin.test.assertNull
 
@@ -30,11 +29,9 @@ class DurationTest {
             )
         assertEquals(half_an_hour_string, map[0.5.hours])
         assertEquals(half_an_hour_string, map[30.minutes])
-        assertEquals(half_an_hour_string, map[30.asMinutes])
 
         assertEquals(half_a_day_string, map[0.5.days])
         assertEquals(half_a_day_string, map[12.hours])
-        assertEquals(half_a_day_string, map[12.asHours])
 
         assertNull(map[0.5.hours + 1.nano])
         assertNull(map[0.5.days + 1.nano])
@@ -42,27 +39,25 @@ class DurationTest {
 
     @Test
     fun equality_across_subtypes() {
-        assertEquals(30.minutes, 0.5.asHours)
-        assertNotEquals<Class<*>>(30.minutes.javaClass, 0.5.asHours.javaClass)
+        assertEquals(30.minutes, 0.5.hours)
     }
 
     @Test
     fun hash_code_equality_across_subtypes() {
-        assertEquals(30.minutes.hashCode(), 0.5.asHours.hashCode())
-        assertNotEquals<Class<*>>(30.minutes.javaClass, 0.5.asHours.javaClass)
+        assertEquals(30.minutes.hashCode(), 0.5.hours.hashCode())
     }
 
     @Test
     fun sorting_order_with_different_subtypes() {
         val expected = listOf(
-            1.asNanos,
-            1.asMicros,
-            1.asMillis,
-            1.asSeconds,
-            1.asMinutes,
-            1.asHours,
-            1.asDays,
-            1.asWeeks
+            1.nano,
+            1.micro,
+            1.milli,
+            1.second,
+            1.minute,
+            1.hour,
+            1.day,
+            1.week
         )
         val sorted = expected.reversed().sorted()
 
