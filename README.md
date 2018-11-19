@@ -12,7 +12,7 @@ Add it to your gradle dependencies.
 
 ```kotlin
 dependencies {
-    implementation("eu.markov.kotlin.lucidtime:duration:1.0.0")
+    implementation("eu.markov.kotlin.lucidtime:duration:2.0.0")
 }
 ```
 
